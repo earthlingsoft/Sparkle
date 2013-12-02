@@ -1040,7 +1040,7 @@
 					61B5F90109C4CEE200B25A18 = {
 						SystemCapabilities = {
 							com.apple.Sandbox = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -1167,7 +1167,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		22760C6F183F78AB0047AABB /* Sign framework and XPC service */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -1177,7 +1177,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "codesign --verbose=2 --deep --force --identifier org.andymatuschak.Sparkle $OTHER_CODE_SIGN_FLAGS --sign \"$CODE_SIGN_IDENTITY\" \"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/Sparkle.framework\"\n\ncodesign --verbose=2 --deep --force --identifier com.andymatuschak.Sparkle.SandboxService $OTHER_CODE_SIGN_FLAGS --sign \"$CODE_SIGN_IDENTITY\" \"$BUILT_PRODUCTS_DIR/$XPCSERVICES_FOLDER_PATH/com.andymatuschak.Sparkle.SandboxService.xpc\"\n\n\n";
+			shellScript = "#codesign --verbose=2 --deep --force --identifier org.andymatuschak.Sparkle $OTHER_CODE_SIGN_FLAGS --sign \"$CODE_SIGN_IDENTITY\" \"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/Sparkle.framework\"\n\n#codesign --verbose=2 --deep --force --identifier com.andymatuschak.Sparkle.SandboxService $OTHER_CODE_SIGN_FLAGS --sign \"$CODE_SIGN_IDENTITY\" \"$BUILT_PRODUCTS_DIR/$XPCSERVICES_FOLDER_PATH/com.andymatuschak.Sparkle.SandboxService.xpc\"\n\n\n";
 		};
 		5D06E90D0FD68DA3005AE3F6 /* Fix Install Name */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1558,6 +1558,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941CA0D94A70100DD942E /* ConfigFrameworkDebug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				INSTALL_PATH = "@rpath";
 			};
@@ -1567,6 +1568,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941D50D94A70100DD942E /* ConfigFrameworkRelease.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				INSTALL_PATH = "@rpath";
@@ -1576,13 +1578,19 @@
 		1DEB91B208733DA50010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx10.7;
 			};
 			name = Debug;
 		};
 		1DEB91B308733DA50010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx10.7;
 			};
 			name = Release;
 		};
@@ -1607,6 +1615,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = finish_installation;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1630,6 +1639,7 @@
 					AppKit,
 				);
 				PRODUCT_NAME = finish_installation;
+				PROVISIONING_PROFILE = "";
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -1668,8 +1678,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941CB0D94A70100DD942E /* ConfigTestAppDebug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Sparkle Test App.entitlements";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Debug;
@@ -1678,8 +1686,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941D20D94A70100DD942E /* ConfigTestAppRelease.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Sparkle Test App.entitlements";
-				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 			};
 			name = Release;
